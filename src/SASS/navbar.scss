@@ -1,0 +1,16 @@
+@import "./index.scss";
+
+$primary: green;
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+.h1-netflix {
+  color: $color-netflix;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: $font-netflix;
+}
+
+.btn-sign-up {
+  background-color: $color-netflix;
+}
