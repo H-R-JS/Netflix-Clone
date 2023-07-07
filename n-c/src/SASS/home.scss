@@ -19,3 +19,52 @@
   color: #fff;
   z-index: 2;
 }
+
+////////////////////
+
+.article-movies:hover {
+  .arrow {
+    visibility: visible;
+  }
+}
+
+.movies-container {
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.movie {
+  width: 200px;
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.img-info {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  p {
+    white-space: wrap;
+  }
+}
+
+.arrow {
+  visibility: hidden;
+  opacity: 0.5;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.arrow:hover {
+  opacity: 1;
+}
+
+.img-info:hover {
+  opacity: 1;
+}
+
+.icon-heart {
+  top: 4px;
+  left: 4px;
+}
