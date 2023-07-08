@@ -3,7 +3,7 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import axios from "axios";
 import { Movie } from "./Movie";
 
-export const Row = ({ title, fetchURL }) => {
+export const Row = ({ title, fetchURL, rowID }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -14,16 +14,27 @@ export const Row = ({ title, fetchURL }) => {
 
   console.log(movies);
 
+  const slideLeft = () => {
+    var slider = document.getElementById("slider " + rowID);
+    slider.scrollLeft = slider.scrollLeft - 500;
+  };
+
+  const slideRight = () => {
+    var slider = document.getElementById("slider " + rowID);
+    slider.scrollLeft = slider.scrollLeft + 500;
+  };
+
   return (
     <section>
       <h2 className="text-white p-4">{title}</h2>
       <article className="article-movies position-relative d-flex align-items-center">
         <MdChevronLeft
-          className="arrow bg-white rounded-circle position-absolute "
+          onClick={slideLeft}
+          className="arrow bg-white rounded-circle position-absolute start-0 "
           size={40}
         />
         <div
-          id={"slider"}
+          id={"slider " + rowID}
           className=" movies-container position-relative w-100 h-100"
         >
           {movies.map((item, index) => {
@@ -31,7 +42,8 @@ export const Row = ({ title, fetchURL }) => {
           })}
         </div>
         <MdChevronRight
-          className="arrow bg-white rounded-circle position-absolute "
+          onClick={slideRight}
+          className="arrow bg-white rounded-circle position-absolute end-0 "
           size={40}
         />
       </article>

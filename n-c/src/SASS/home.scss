@@ -28,8 +28,13 @@
   }
 }
 
+#slider {
+  transition: all 0.3s;
+}
+
 .movies-container {
   overflow-x: hidden;
+  scroll-behavior: smooth;
   white-space: nowrap;
 }
 
