@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { UserAuth } from "../Context/AuthContext";
 
 export const Navbar = () => {
+  const { user, logOut } = UserAuth();
+  console.log(user);
   return (
     <nav className="navbar d-flex align-items-center justify-content-between w-100 position-absolute p-4 ">
       <Link to="/" className="text-decoration-none">

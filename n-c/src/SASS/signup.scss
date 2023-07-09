@@ -1,6 +1,15 @@
 .section-signup {
-  left: 40%;
+  width: 450px;
+  height: 700px;
   top: 125px;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 3;
+}
+
+.input-up {
+  background-color: #26282d;
+}
+
+.btn-up {
+  background: $color-netflix;
 }

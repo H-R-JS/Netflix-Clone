@@ -5,13 +5,12 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-} from "module";
-import { userInfo } from "os";
+} from "firebase/auth";
 
 const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
-  cont[(userInfo, setUser)] = useState({});
+  const [user, setUser] = useState({});
 
   function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
