@@ -22,7 +22,7 @@ export const Navbar = () => {
       </Link>
       {user?.email ? (
         <section>
-          <Link to="/acount" className="text-decoration-none">
+          <Link to="/account" className="text-decoration-none">
             <button className="text-white px-4">Account</button>
           </Link>
           <Link className="text-decoration-none">
