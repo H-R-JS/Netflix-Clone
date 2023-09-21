@@ -23,7 +23,7 @@ export const Row = ({ title, fetchURL, rowID }) => {
   };
 
   return (
-    <section>
+    <section className="section-row">
       <h2 className="text-white p-4">{title}</h2>
       <article className="article-movies position-relative d-flex align-items-center">
         <MdChevronLeft

@@ -11,7 +11,6 @@ export const Home = () => {
       <Row rowID="2" title="Popular" fetchURL={request.requestPopular} />
       <Row rowID="3" title="Trending" fetchURL={request.requestTrending} />
       <Row rowID="4" title="Top Rated" fetchURL={request.requestTopRated} />
-      <Row rowID="5" title="Horror" fetchURL={request.requestHorror} />
     </main>
   );
 };

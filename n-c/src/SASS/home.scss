@@ -22,6 +22,11 @@
 
 ////////////////////
 
+.section-row {
+  margin-top: 10px;
+  height: 250px;
+}
+
 .article-movies:hover {
   .arrow {
     visibility: visible;
@@ -47,8 +52,10 @@
 }
 
 .img-info {
+  position: absolute;
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.8);
+  transition: opacity 0.2s;
   p {
     white-space: wrap;
   }
@@ -72,4 +79,23 @@
 .icon-heart {
   top: 4px;
   left: 4px;
+  cursor: pointer;
+}
+
+.play-container {
+  position: absolute;
+  margin-top: -30px;
+  margin-left: 80px;
+}
+
+.play {
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.play:hover {
+  opacity: 0.8;
 }

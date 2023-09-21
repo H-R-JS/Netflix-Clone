@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import videoTrailer from "./Trailer/trailer.mp4";
 import { request } from "../../Request";
 
 export const BigPage = () => {
@@ -20,6 +22,7 @@ export const BigPage = () => {
       return str;
     }
   };
+
   return (
     <section>
       <div className="back-gradient position-absolute w-100"></div>
@@ -30,7 +33,10 @@ export const BigPage = () => {
       />
       <article className="section-home position-absolute w-100 p-4">
         <h1>{movie?.title}</h1>
-        <button className="bg-light py-2 px-4 ">Play</button>
+        <Link to="/trailer">
+          <button className="bg-light py-2 px-4 ">Play</button>
+        </Link>
+
         <button className="border border-light py-2 px-4 mx-4 text-white">
           Watch Later
         </button>
