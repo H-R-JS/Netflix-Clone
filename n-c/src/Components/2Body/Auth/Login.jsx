@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../Context/AuthContext";
@@ -13,8 +14,15 @@ export const Login = () => {
     e.preventDefault();
     setError("");
     try {
-      await logIn(email, password);
-      navigate("/");
+      await axios
+        .post(
+          "http://localhost:3001/login",
+          JSON.stringify({ email, password })
+        )
+        .then((response) => {
+          console.log(response.data);
+          // navigate("/");
+        });
     } catch (err) {
       console.log(err);
       setError(err.message);

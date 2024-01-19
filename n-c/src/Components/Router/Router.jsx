@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Home } from "../2Body/Home";
 import { Trailer } from "../2Body/Trailer/Trailer";
 import { Login } from "../2Body/Auth/Login";
-import { SignUp } from "../2Body/Auth/SignUp";
+import { Register } from "../2Body/Auth/Register";
 import { Account } from "../2Body/Account/Account";
 import { ProtectedRoute } from "../2Body/Auth/ProtectedRoute";
 
