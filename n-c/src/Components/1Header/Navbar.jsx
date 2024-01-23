@@ -39,7 +39,7 @@ export const Navbar = () => {
           <Link to="/login" className="text-decoration-none">
             <button className="text-white px-4">Sign In</button>
           </Link>
-          <Link to="/signup" className="text-decoration-none">
+          <Link to="/register" className="text-decoration-none">
             <button className="btn-sign-up text-white px-4 py-2 rounded">
               Sign Up
             </button>

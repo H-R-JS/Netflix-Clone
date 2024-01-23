@@ -15,12 +15,9 @@ export const Login = () => {
     setError("");
     try {
       await axios
-        .post(
-          "http://localhost:3001/login",
-          JSON.stringify({ email, password })
-        )
+        .post("http://localhost:3001/login", { email, password })
         .then((response) => {
-          console.log(response.data);
+          //console.log(response.data);
           // navigate("/");
         });
     } catch (err) {

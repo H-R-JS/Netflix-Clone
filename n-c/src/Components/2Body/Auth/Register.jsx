@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../Context/AuthContext";
 
-export const SignUp = () => {
+export const Register = () => {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { user, signUp } = UserAuth();
   const navigate = useNavigate();
@@ -11,12 +13,20 @@ export const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signUp(email, password);
-      navigate("/");
+      await axios
+        .post("http://localhost:3001/register", { email, username, password })
+        .then((response) => {
+          console.log(response.data);
+          // navigate("/");
+        });
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    console.log(email, username, password);
+  }, [email, username, password]);
 
   return (
     <main className="d-flex justify-content-center w-100 h-100">
@@ -35,6 +45,13 @@ export const SignUp = () => {
             type="email"
             placeholder="Email"
             autoComplete="email"
+          />
+          <input
+            onChange={(e) => setUsername(e.target.value)}
+            className="input-up py-3 px-3 my-3 rounded text-white"
+            type="name"
+            placeholder="Username"
+            //autoComplete="email"
           />
           <input
             onChange={(e) => setPassword(e.target.value)}
