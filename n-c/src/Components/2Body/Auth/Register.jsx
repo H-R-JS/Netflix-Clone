@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../../Context/AuthContext";
 
 export const Register = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { user, signUp } = UserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {

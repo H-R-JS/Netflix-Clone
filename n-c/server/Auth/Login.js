@@ -1,31 +1,63 @@
 import { DB } from "../SQL/Connection.js";
 import bcrypt from "bcrypt";
-import { render } from "@testing-library/react";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const LoginController = async (req, res) => {
   const { email, password } = req.body;
+  // check req.body
   if (!email || !password)
     return res
       .status(400)
       .json({ message: "Email and Password are required ." });
-
-  var sqlDB = (data) => {
+  // match db sql log
+  var sqlDB = async () => {
     DB.query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
       // check error
       if (!result) return result.status(400).json({ err });
-      if (!result[0].email == email) return result.status(400).json({ err });
-      try {
-        bcrypt.compare(password, result[0].password);
-        render(result);
-      } catch (err) {
-        console.error(err);
+      if (
+        !result[0].email == email ||
+        !bcrypt.compare(password, result[0].password)
+      ) {
+        return result
+          .status(400)
+          .json({ message: "Email or password is incorrect" });
+      } else {
+        // create JWT
+        const accessToken = jwt.sign(
+          {
+            UserInfo: {
+              email: result[0].email,
+              user: result[0].username,
+            },
+          },
+          process.env.ACCESS_TOKEN_SECRET,
+          { expiresIn: "30s" }
+        );
+
+        const refreshToken = jwt.sign(
+          {
+            UserInfo: {
+              email: result[0].email,
+              user: result[0].username,
+            },
+          },
+          process.env.REFRESH_TOKEN_SECRET,
+          { expiresIn: "1d" }
+        );
       }
+      res.cookie("jwt", refreshToken, {
+        httpOnly: true,
+        sameSite: "None",
+        //secure: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      });
 
-      data = result;
-      // console.log(data);
+      const user = result[0].username;
+
+      return res.json({ email, user, accessToken });
     });
-    return data;
   };
-
-  const dataSQL = console.log(sqlDB());
+  sqlDB();
 };

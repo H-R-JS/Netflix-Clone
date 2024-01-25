@@ -1,13 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../../Context/AuthContext";
+import { useAuth } from "../../Context/useAuth";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { user, logIn } = UserAuth();
+
+  const { auth, setAuth } = useAuth();
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -17,8 +19,12 @@ export const Login = () => {
       await axios
         .post("http://localhost:3001/login", { email, password })
         .then((response) => {
-          //console.log(response.data);
-          // navigate("/");
+          console.log(response.data);
+          const user = response.data.user;
+          const accessToken = response.data.accessToken;
+          setAuth({ user, accessToken });
+          console.log(auth);
+          navigate("/");
         });
     } catch (err) {
       console.log(err);
@@ -62,7 +68,7 @@ export const Login = () => {
           </div>
           <p className="py-4">
             <span className="text-secondary">New to Netflix ?</span>{" "}
-            <Link to="/signup" className="text-white">
+            <Link to="/register" className="text-white">
               Sign Up
             </Link>
           </p>

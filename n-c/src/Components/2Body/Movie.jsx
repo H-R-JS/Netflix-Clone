@@ -1,28 +1,26 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHeart, FaRegHeart, FaPlayCircle } from "react-icons/fa";
-import { UserAuth } from "../Context/AuthContext";
-import { db } from "../../Firebase";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { useAuth } from "../Context/useAuth";
+import axios from "axios";
 
 export const Movie = ({ item }) => {
   const [like, setLike] = useState(false);
   const [saved, setSaved] = useState(false);
-  const { user } = UserAuth();
-
-  const movieID = doc(db, "uUsers", `${user?.email}`);
+  const { auth } = useAuth();
 
   const saveShow = async () => {
-    if (user?.email) {
+    const id = item.id;
+    const img = item.backdrop_path;
+    const title = item.title;
+    if (auth?.email) {
       setLike(!like);
       setSaved(true);
-      await updateDoc(movieID, {
-        savedShows: arrayUnion({
-          id: item.id,
-          title: item.title,
-          img: item.backdrop_path,
-        }),
-      });
+      await axios
+        .post("http://localhost:3001/addFavorite", { id, img, title })
+        .then((response) => {
+          console.log(response);
+        });
     } else {
       alert("Veuillez vous connecter pour mettre un film en favori .");
     }

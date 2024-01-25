@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { AiOutlineClose } from "react-icons/ai";
-import { UserAuth } from "../../Context/AuthContext";
-import { db } from "../../../Firebase";
-import { updateDoc, doc, onSnapshot } from "firebase/firestore";
 
 export const SavedShows = () => {
   const [movies, setMovies] = useState([]);
-  const { user } = UserAuth();
-
-  useEffect(() => {
-    onSnapshot(doc(db, "uUsers", `${user?.email}`), (doc) => {
-      setMovies(doc.data()?.savedShows);
-      console.log(movies);
-    });
-  }, [user?.email]);
 
   const slideLeft = () => {
     var slider = document.getElementById("slider");
@@ -24,18 +13,6 @@ export const SavedShows = () => {
   const slideRight = () => {
     var slider = document.getElementById("slider");
     slider.scrollLeft = slider.scrollLeft + 500;
-  };
-
-  const movieRef = doc(db, "uUsers", `${user?.email}`);
-  const deleteShow = async (passedID) => {
-    try {
-      const result = movies.filter((item) => item.id !== passedID);
-      await updateDoc(movieRef, {
-        savedShows: result,
-      });
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   return (
@@ -66,7 +43,7 @@ export const SavedShows = () => {
                     {item?.title}
                   </p>
                   <p
-                    onClick={() => deleteShow(item.id)}
+                    //onClick={() => deleteShow(item.id)}
                     className="icon-delete position-absolute"
                   >
                     <AiOutlineClose />
