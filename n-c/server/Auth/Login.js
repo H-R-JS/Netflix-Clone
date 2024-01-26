@@ -1,6 +1,7 @@
 import { DB } from "../SQL/Connection.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 
@@ -46,17 +47,16 @@ export const LoginController = async (req, res) => {
           process.env.REFRESH_TOKEN_SECRET,
           { expiresIn: "1d" }
         );
+        res.cookie("jwt", refreshToken, {
+          httpOnly: true,
+          sameSite: "None",
+          //secure: true,
+          maxAge: 24 * 60 * 60 * 1000,
+        });
+        const user = result[0].username;
+
+        return res.json({ email, user, accessToken });
       }
-      res.cookie("jwt", refreshToken, {
-        httpOnly: true,
-        sameSite: "None",
-        //secure: true,
-        maxAge: 24 * 60 * 60 * 1000,
-      });
-
-      const user = result[0].username;
-
-      return res.json({ email, user, accessToken });
     });
   };
   sqlDB();

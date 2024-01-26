@@ -20,11 +20,15 @@ export const Login = () => {
         .post("http://localhost:3001/login", { email, password })
         .then((response) => {
           console.log(response.data);
-          const user = response.data.user;
+          const email = response.data.email;
           const accessToken = response.data.accessToken;
-          setAuth({ user, accessToken });
-          console.log(auth);
-          navigate("/");
+          setAuth({ email, accessToken });
+          console.log(auth?.email);
+          if (auth?.email == undefined) {
+            return alert("Connection issue, try again please.");
+          } else {
+            return navigate("/");
+          }
         });
     } catch (err) {
       console.log(err);

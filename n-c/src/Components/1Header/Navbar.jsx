@@ -20,7 +20,7 @@ export const Navbar = () => {
       <Link to="/" className="text-decoration-none">
         <h1 className="h1-netflix">NETFLIX</h1>
       </Link>
-      {auth?.user ? (
+      {auth?.email ? (
         <section>
           <Link to="/account" className="text-decoration-none">
             <button className="text-white px-4">Account</button>

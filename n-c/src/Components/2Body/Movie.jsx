@@ -13,11 +13,18 @@ export const Movie = ({ item }) => {
     const id = item.id;
     const img = item.backdrop_path;
     const title = item.title;
+    const emailUser = auth?.email;
     if (auth?.email) {
+      console.log(auth?.email);
       setLike(!like);
       setSaved(true);
       await axios
-        .post("http://localhost:3001/addFavorite", { id, img, title })
+        .post("http://localhost:3001/addFavorite", {
+          emailUser,
+          id,
+          img,
+          title,
+        })
         .then((response) => {
           console.log(response);
         });

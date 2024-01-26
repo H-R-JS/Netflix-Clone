@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { AiOutlineClose } from "react-icons/ai";
+import axios from "axios";
+import { useAuth } from "../../Context/useAuth";
 
 export const SavedShows = () => {
   const [movies, setMovies] = useState([]);
+
+  const { auth } = useAuth();
 
   const slideLeft = () => {
     var slider = document.getElementById("slider");
@@ -14,6 +18,30 @@ export const SavedShows = () => {
     var slider = document.getElementById("slider");
     slider.scrollLeft = slider.scrollLeft + 500;
   };
+
+  const email = auth?.email;
+  const getData = async () => {
+    console.log(email);
+    await axios
+      .post("http://localhost:3001/dataFavorite", { email })
+      .then((res) => {
+        console.log(res.data.result);
+        const result = res.data.result;
+        setMovies([...result]);
+        console.log(movies);
+      });
+  };
+
+  const deleteData = async (id) => {
+    await axios
+      .post("http://localhost:3001/deleteFavorite", { id })
+      .then((res) => {
+        console.log(res);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <section>
@@ -43,7 +71,7 @@ export const SavedShows = () => {
                     {item?.title}
                   </p>
                   <p
-                    //onClick={() => deleteShow(item.id)}
+                    onClick={() => deleteData(item.id)}
                     className="icon-delete position-absolute"
                   >
                     <AiOutlineClose />
