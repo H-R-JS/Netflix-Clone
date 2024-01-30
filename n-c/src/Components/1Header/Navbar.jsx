@@ -1,5 +1,7 @@
+import axios from "axios";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useRefreshToken } from "../2Body/Auth/Hook/useRefreshToken";
 import { useAuth } from "../Context/useAuth";
 
 export const Navbar = () => {
@@ -15,6 +17,16 @@ export const Navbar = () => {
     }
   };*/
 
+  const checkAuth = async () => {
+    await axios
+      .get("http://localhost:3001/verifyAuth", {
+        headers: { Authorization: `Bearer ${auth?.accessToken}` },
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
   return (
     <nav className="navbar d-flex align-items-center justify-content-between w-100 position-absolute p-4 ">
       <Link to="/" className="text-decoration-none">
@@ -25,6 +37,7 @@ export const Navbar = () => {
           <Link to="/account" className="text-decoration-none">
             <button className="text-white px-4">Account</button>
           </Link>
+          <button onClick={checkAuth}>Check Auth</button>
           <Link className="text-decoration-none">
             <button
               // onClick={handleLogout}

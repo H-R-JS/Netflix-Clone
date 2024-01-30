@@ -6,6 +6,7 @@ import { useAuth } from "../../Context/useAuth";
 
 export const SavedShows = () => {
   const [movies, setMovies] = useState([]);
+  const [delClass, setDelClass] = useState("movie");
 
   const { auth } = useAuth();
 
@@ -36,7 +37,8 @@ export const SavedShows = () => {
     await axios
       .post("http://localhost:3001/deleteFavorite", { id })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        getData();
       });
   };
   useEffect(() => {
@@ -45,7 +47,7 @@ export const SavedShows = () => {
 
   return (
     <section>
-      <h2 className="text-white p-4">Mes favories</h2>
+      <h2 className="text-white p-4">My favorites</h2>
       <article className="article-movies position-relative d-flex align-items-center">
         <MdChevronLeft
           onClick={slideLeft}

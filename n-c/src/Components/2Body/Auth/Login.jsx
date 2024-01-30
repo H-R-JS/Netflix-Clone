@@ -17,9 +17,15 @@ export const Login = () => {
     setError("");
     try {
       await axios
-        .post("http://localhost:3001/login", { email, password })
+        .post(
+          "http://localhost:3001/login",
+          { email, password },
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
         .then((response) => {
-          console.log(response.data);
           const email = response.data.email;
           const accessToken = response.data.accessToken;
           setAuth({ email, accessToken });

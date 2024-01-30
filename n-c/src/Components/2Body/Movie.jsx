@@ -16,7 +16,6 @@ export const Movie = ({ item }) => {
     const emailUser = auth?.email;
     if (auth?.email) {
       console.log(auth?.email);
-      setLike(!like);
       setSaved(true);
       await axios
         .post("http://localhost:3001/addFavorite", {
@@ -26,7 +25,12 @@ export const Movie = ({ item }) => {
           title,
         })
         .then((response) => {
-          console.log(response);
+          if (response?.data?.message) {
+            alert(response.data.message);
+          } else {
+            setLike(!like);
+            console.log(response);
+          }
         });
     } else {
       alert("Veuillez vous connecter pour mettre un film en favori .");

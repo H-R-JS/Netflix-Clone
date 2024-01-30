@@ -6,6 +6,23 @@
   z-index: 3;
 }
 
+.err-msg {
+  color: red;
+  text-align: center;
+}
+
+.err-msg-hidden {
+  display: none;
+}
+
+.instructions {
+  font-size: 10px;
+}
+
+.instructions-hidden {
+  display: none;
+}
+
 .input-up {
   background-color: #26282d;
 }

@@ -5,8 +5,19 @@ export const DeleteFavorite = async (req, res) => {
 
   if (!id) return res.status(400).json({ message: "ID movie is missing" });
   try {
-    DB.query("SELECT id FROM favorite WHERE id = ?", [id], (err, result) => {});
+    DB.query("DELETE FROM favorite WHERE id = ?", [id], (err, result) => {
+      // console.log(result);
+      return res.json(result);
+    });
   } catch (err) {
     console.error(err);
   }
+  /*try {
+    DB.query("SELECT * FROM favorite WHERE id = ?", [id], (err, result) => {
+      console.log(result);
+      return;
+    });
+  } catch (err) {
+    console.error(err);
+  }*/
 };
