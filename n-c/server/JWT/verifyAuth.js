@@ -5,7 +5,6 @@ dotenv.config();
 
 export const verifyAuth = (req, res, next) => {
   const { authorization } = req.headers;
-  console.log(authorization);
   if (!authorization?.startsWith("Bearer")) return res.senStatus(401);
   const token = authorization.split(" ")[1];
 
@@ -15,5 +14,4 @@ export const verifyAuth = (req, res, next) => {
     req.user = decoded.UserInfo.user;
     next();
   });
-  console.log(req.email, req.user);
 };

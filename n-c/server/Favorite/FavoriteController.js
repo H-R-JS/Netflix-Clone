@@ -8,8 +8,8 @@ export const FavoriteController = async (req, res) => {
     return res.status(400).json({ message: "Data miss on the movie" });
   // check is favorite already exist
   DB.query(
-    "SELECT * FROM favorite WHERE id_content = ?",
-    [id],
+    "SELECT * FROM favorite WHERE id_content = ? AND email = ?",
+    [id, emailUser],
     (err, result) => {
       if (err) return console.error(err);
       var matchID = [];
@@ -18,9 +18,8 @@ export const FavoriteController = async (req, res) => {
           id: item.id_content,
         });
       });
-      console.log(matchID);
       if (matchID.length > 0) {
-        return res.json({ message: "Movie already is in favorites" });
+        return res.json({ message: "Movie already in favorites" });
       } else {
         // insert favorite in db
         try {

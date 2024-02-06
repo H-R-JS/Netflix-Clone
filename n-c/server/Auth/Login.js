@@ -1,5 +1,5 @@
 import { DB } from "../SQL/Connection.js";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 
@@ -18,8 +18,8 @@ export const LoginController = async (req, res) => {
       // check error
       if (!result) return result.status(400).json({ err });
       if (
-        !result[0].email == email ||
-        !bcrypt.compare(password, result[0].password)
+        !result[0]?.email == email ||
+        !bcryptjs?.compare(password, result[0].password)
       ) {
         return result
           .status(400)
@@ -49,8 +49,7 @@ export const LoginController = async (req, res) => {
         );
         res.cookie("jwt", refreshToken, {
           httpOnly: true,
-          //sameSite: "None",
-          //secure: true,
+
           maxAge: 24 * 60 * 60 * 1000,
         });
         const user = result[0].username;

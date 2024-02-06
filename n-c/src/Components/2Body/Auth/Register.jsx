@@ -29,25 +29,21 @@ export const Register = () => {
 
   useEffect(() => {
     const result = EMAIL_REGEX.test(email);
-    console.log(result);
     setValidEmail(result);
   }, [email]);
 
   useEffect(() => {
     const result = USER_REGEX.test(username);
-    console.log(result);
     setValidUsername(result);
   }, [username]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(password);
-    console.log(result);
     setValidPassword(result);
   }, [password]);
 
   useEffect(() => {
     const match = password === MPassword;
-    console.log(match);
     setValidMPassword(match);
   }, [MPassword]);
 
@@ -65,18 +61,21 @@ export const Register = () => {
         await axios
           .post("http://localhost:3001/register", { email, username, password })
           .then((response) => {
-            console.log(response.data);
-            navigate("/login");
+            if (response?.data?.message) {
+              return setErrorMsg(`${response?.data?.message}`);
+            } else {
+              navigate("/login");
+            }
           });
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log(email, username, password);
-  }, [email, username, password]);
+  }, [email, username, password]);*/
 
   return (
     <main className="d-flex justify-content-center w-100 h-100">

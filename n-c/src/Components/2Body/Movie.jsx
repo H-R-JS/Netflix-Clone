@@ -6,7 +6,6 @@ import axios from "axios";
 
 export const Movie = ({ item }) => {
   const [like, setLike] = useState(false);
-  const [saved, setSaved] = useState(false);
   const { auth } = useAuth();
 
   const saveShow = async () => {
@@ -15,8 +14,6 @@ export const Movie = ({ item }) => {
     const title = item.title;
     const emailUser = auth?.email;
     if (auth?.email) {
-      console.log(auth?.email);
-      setSaved(true);
       await axios
         .post("http://localhost:3001/addFavorite", {
           emailUser,

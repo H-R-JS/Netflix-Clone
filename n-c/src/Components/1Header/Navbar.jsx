@@ -1,30 +1,20 @@
-import axios from "axios";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useRefreshToken } from "../2Body/Auth/Hook/useRefreshToken";
 import { useAuth } from "../Context/useAuth";
+import { useLogout } from "../2Body/Auth/Hook/useLogout";
 
 export const Navbar = () => {
   const { auth } = useAuth();
   const navigate = useNavigate();
+  const logout = useLogout();
 
-  /* const handleLogout = async () => {
+  const signOut = async () => {
     try {
-      await logOut();
+      await logout();
       navigate("/");
     } catch (err) {
       console.error(err);
     }
-  };*/
-
-  const checkAuth = async () => {
-    await axios
-      .get("http://localhost:3001/verifyAuth", {
-        headers: { Authorization: `Bearer ${auth?.accessToken}` },
-      })
-      .then((res) => {
-        console.log(res);
-      });
   };
 
   return (
@@ -37,10 +27,9 @@ export const Navbar = () => {
           <Link to="/account" className="text-decoration-none">
             <button className="text-white px-4">Account</button>
           </Link>
-          <button onClick={checkAuth}>Check Auth</button>
           <Link className="text-decoration-none">
             <button
-              // onClick={handleLogout}
+              onClick={signOut}
               className="btn-sign-up text-white px-4 py-2 rounded"
             >
               Logout

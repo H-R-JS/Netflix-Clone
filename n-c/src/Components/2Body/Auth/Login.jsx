@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/useAuth";
 
@@ -29,18 +29,17 @@ export const Login = () => {
           const email = response.data.email;
           const accessToken = response.data.accessToken;
           setAuth({ email, accessToken });
-          console.log(auth?.email);
-          if (auth?.email == undefined) {
-            return alert("Connection issue, try again please.");
-          } else {
-            return navigate("/");
-          }
         });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setError(err.message);
     }
   };
+
+  useEffect(() => {
+    if (auth?.email) return navigate("/");
+  }, [auth]);
+
   return (
     <main className="d-flex justify-content-center w-100 h-100">
       <img
@@ -70,12 +69,6 @@ export const Login = () => {
           <button className="btn-up rounded py-3 my-5 text-white ">
             Sign In
           </button>
-          <div className="d-flex justify-content-between align-items-center text-secondary">
-            <p>
-              <input className="mr-2" type="checkbox" /> Remenber me
-            </p>
-            <p>Need Help ?</p>
-          </div>
           <p className="py-4">
             <span className="text-secondary">New to Netflix ?</span>{" "}
             <Link to="/register" className="text-white">

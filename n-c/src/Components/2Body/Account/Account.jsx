@@ -11,7 +11,7 @@ export const Account = () => {
       />
       <div className="back-dark position-absolute top-0 left-0 w-100 "></div>
       <div className="title-container position-absolute p-5">
-        <h1 className="font-weight-bold">Mes Favories</h1>
+        <h1 className="font-weight-bold">My favorites</h1>
       </div>
       <SavedShows />
     </div>
