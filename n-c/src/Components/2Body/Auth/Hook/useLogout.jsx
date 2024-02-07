@@ -7,9 +7,12 @@ export const useLogout = () => {
   const logout = async () => {
     setAuth({});
     try {
-      const response = await axios("http://localhost:3001/logout", {
-        withCredentials: true,
-      });
+      const response = await axios(
+        "https://clone-netflix-77383829fc51.herokuapp.com/logout",
+        {
+          withCredentials: true,
+        }
+      );
     } catch (err) {
       console.error(err);
     }

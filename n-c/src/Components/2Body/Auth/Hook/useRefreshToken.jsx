@@ -4,9 +4,12 @@ import axios from "axios";
 export const useRefreshToken = () => {
   const { setAuth } = useAuth();
   const refresh = async () => {
-    const response = await axios.get("http://localhost:3001/refresh", {
-      withCredentials: true,
-    });
+    const response = await axios.get(
+      "https://clone-netflix-77383829fc51.herokuapp.com/refresh",
+      {
+        withCredentials: true,
+      }
+    );
     if (!response?.data) {
       return alert("Connection lost .");
     } else {

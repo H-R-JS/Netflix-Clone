@@ -12,7 +12,9 @@ export const SavedShows = () => {
   const email = auth?.email;
   const getData = async () => {
     await axios
-      .post("http://localhost:3001/dataFavorite", { email })
+      .post("https://clone-netflix-77383829fc51.herokuapp.com/dataFavorite", {
+        email,
+      })
       .then((res) => {
         const result = res.data.result;
         setMovies([...result]);
